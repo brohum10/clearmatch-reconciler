@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clearmatch-reconciler"
+version = "0.1.0"
+description = "Deterministic one-to-one transaction reconciliation with review gates"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "Soham Jindal"}]
+dependencies = []
+
+[project.scripts]
+clearmatch = "clearmatch.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["clearmatch*"]

@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Compile
+        run: python -m compileall -q clearmatch tests benchmarks
+      - name: Test matching and CLI
+        run: python -W error -m unittest discover -s tests -v
+      - name: Install package
+        run: python -m pip install .
+      - name: Verify installed command and audit report
+        run: |
+          clearmatch examples/orders.csv examples/settlements.csv --output reports/sample.json
+          python -c 'import json; r=json.load(open("reports/sample.json")); assert r["counts"]["automatic_matches"] == 3; assert r["counts"]["review_suggestions"] == 2'
+      - name: Exercise synthetic benchmark
+        run: python benchmarks/run.py --records 200 --groups 20 --repeats 2

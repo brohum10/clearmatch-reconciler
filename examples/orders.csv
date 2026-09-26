@@ -1,0 +1,7 @@
+id,account,amount_cents,currency,date,reference
+O-100,merchant-a,12000,USD,2026-09-01,INV-100
+O-101,merchant-a,8000,USD,2026-09-02,INV-101
+O-102,merchant-b,7000,USD,2026-09-01,INV-102
+O-103,merchant-c,5000,USD,2026-09-04,
+O-104,merchant-a,3400,USD,2026-09-06,INV-104
+O-105,merchant-d,2900,USD,2026-09-07,INV-105
